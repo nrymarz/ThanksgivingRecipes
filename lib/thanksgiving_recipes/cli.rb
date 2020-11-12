@@ -4,7 +4,6 @@ class ThanksgivingRecipes::CLI
         @item = ''
         @menu = []
         @recipe_list = []
-        @more_recipes = false
     end
     
     def call
@@ -42,12 +41,9 @@ class ThanksgivingRecipes::CLI
     def retrieve_recipes(more = false)
         self.recipe_list.clear
         recipes = FoodNetworkScraper.get_recipes(self.item,more)
-        if recipes.length > 1
-            recipes[0..recipes.length-2].each do |recipe|
-                self.recipe_list << ThanksgivingRecipes::Recipe.new(recipe)
-            end
+        recipes.each do |recipe|
+            self.recipe_list << ThanksgivingRecipes::Recipe.new(recipe)
         end
-        self.more_recipes = recipes[recipes.length-1]
     end
 
     def print_recipes 
@@ -130,16 +126,16 @@ class ThanksgivingRecipes::CLI
     end
 
     def choose_recipe
-        if self.more_recipes
+        if ThanksgivingRecipes::Scraper.more_recipes
             puts 'More recipes available (Type "more" to see new recipes)'
         end
         print "Type the number of the recipe you would like to see more detail about or type -1 to search for a new item:"
         input = gets.strip
         if !input.to_i.between?(1,self.recipe_list.length) && input.to_i != -1 && input != 'more'
             puts "Invalid number, try again"
-        elsif input == 'more' && !self.more_recipes
+        elsif input == 'more' && !ThanksgivingRecipes::Scraper.more_recipes
             puts "No more recipes to show"
-        elsif input == 'more' && self.more_recipes
+        elsif input == 'more' && ThanksgivingRecipes::Scraper.more_recipes
             retrieve_recipes(more = true)
             print `clear`
             print_recipes

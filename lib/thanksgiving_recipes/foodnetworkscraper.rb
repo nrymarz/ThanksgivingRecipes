@@ -27,7 +27,8 @@ class FoodNetworkScraper < ThanksgivingRecipes::Scraper
             @@leftover_recipes << recipe_hashes.pop
         end
         @@page = page
-        recipe_docs.length > 0 || @@leftover_recipes.length > 0 ? recipe_hashes << true : recipe_hashes << false
+        @@more_recipes = recipe_docs.length > 0 || @@leftover_recipes.length > 0
+        recipe_hashes
     end
 
     def self.delete_dupes(array_of_recipe_hashes)
