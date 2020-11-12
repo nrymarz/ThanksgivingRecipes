@@ -9,17 +9,10 @@ class FoodNetworkScraper < ThanksgivingRecipes::Scraper
             url = build_url(item)
             recipe_docs = find_recipes(url,item)
             recipe_hashes = build_recipe_hashes(recipe_docs)
-            page= get_next_page(url)
+            page = get_next_page(url)
         end
         @@leftover_recipes.clear
         create_and_return_recipe_list(item,recipe_hashes,page)
-    end
-    
-    def self.get_more_recipes(item)
-        recipe_hashes = Array.new(@@leftover_recipes)
-        @@leftover_recipes.clear
-
-        create_and_return_recipe_list(item,recipe_hashes,@@page)       
     end
 
     def self.create_and_return_recipe_list(item,recipe_hashes,page)
@@ -85,13 +78,11 @@ class FoodNetworkScraper < ThanksgivingRecipes::Scraper
         directions = doc.css("ol")
         if subrecipe && directions && doc.css('h4.o-Method__a-SubHeadline').length > 0
             subheaders = doc.css('h4.o-Method__a-SubHeadline')
-            if subheaders.length > 0
-                directions = subheaders.detect{|subhead| subhead.text.strip == subrecipe.text.strip}
-                until directions.name == 'ol'
-                    directions = directions.next_element
-                end
-                directions.css('li.o-Method__m-Step').collect {|direction| direction.text.strip}
+            directions = subheaders.detect{|subhead| subhead.text.strip == subrecipe.text.strip}
+            until directions.name == 'ol'
+                directions = directions.next_element
             end
+            directions.css('li.o-Method__m-Step').collect {|direction| direction.text.strip}
         elsif directions && !subrecipe
             directions[0].css('li.o-Method__m-Step').collect {|direction| direction.text.strip}
         else
