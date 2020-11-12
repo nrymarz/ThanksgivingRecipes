@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+require_relative "../config/environment"
+
+print `clear`
+puts "Welcome!" 
+puts "Build a Thanksgiving Menu"
+
+ThanksgivingRecipes::CLI.new.call
