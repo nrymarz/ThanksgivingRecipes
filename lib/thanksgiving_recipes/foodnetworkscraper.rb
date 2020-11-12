@@ -75,10 +75,13 @@ class FoodNetworkScraper < ThanksgivingRecipes::Scraper
     end
 
     def self.get_directions(doc,subrecipe=nil)
-        directions = doc.css("ol")
-        if subrecipe && directions && doc.css('h4.o-Method__a-SubHeadline').length > 0
+        if subrecipe
             subheaders = doc.css('h4.o-Method__a-SubHeadline')
             directions = subheaders.detect{|subhead| subhead.text.strip == subrecipe.text.strip}
+        else
+            directions = doc.css("ol")
+        end
+        if subrecipe && directions
             until directions.name == 'ol'
                 directions = directions.next_element
             end
