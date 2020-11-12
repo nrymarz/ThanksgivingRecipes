@@ -1,4 +1,4 @@
-class FoodNetworkScraper < ThanksgivingRecipes::Scraper
+class FoodNetworkScraper < ThanksgivingRecipes::Scraper #TODO: Last thing i promise, make scraper instantiate recipes
     @@leftover_recipes = []
     @@page = ''
     def self.get_recipes(item, more=false)
@@ -28,7 +28,7 @@ class FoodNetworkScraper < ThanksgivingRecipes::Scraper
         end
         @@page = page
         @@more_recipes = recipe_docs.length > 0 || @@leftover_recipes.length > 0
-        recipe_hashes
+        recipe_hashes.collect {|recipe| recipe = ThanksgivingRecipes::Recipe.new(recipe)}
     end
 
     def self.delete_dupes(array_of_recipe_hashes)

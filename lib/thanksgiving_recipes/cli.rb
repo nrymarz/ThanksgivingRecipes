@@ -40,10 +40,7 @@ class ThanksgivingRecipes::CLI
     
     def retrieve_recipes(more = false)
         self.recipe_list.clear
-        recipes = FoodNetworkScraper.get_recipes(self.item,more)
-        recipes.each do |recipe|
-            self.recipe_list << ThanksgivingRecipes::Recipe.new(recipe)
-        end
+        self.recipe_list = FoodNetworkScraper.get_recipes(self.item,more)
     end
 
     def print_recipes 
