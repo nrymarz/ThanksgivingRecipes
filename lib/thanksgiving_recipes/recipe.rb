@@ -10,8 +10,8 @@ class ThanksgivingRecipes::Recipe
             self.class.attr_accessor(key)
             self.send(("#{key}="),value)
         end
-        self.ingredients = self.create_ingredients if self.ingredients
-        self.sub_recipes = create_sub_recipes(self.sub_recipes) if self.sub_recipes
+        self.ingredients = self.create_ingredients
+        self.sub_recipes = create_sub_recipes(self.sub_recipes)
     end
     def create_ingredients
         self.ingredients.collect do |ingredient|

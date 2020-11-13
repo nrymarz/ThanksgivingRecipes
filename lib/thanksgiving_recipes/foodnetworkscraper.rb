@@ -1,4 +1,4 @@
-class FoodNetworkScraper < ThanksgivingRecipes::Scraper #TODO: Last thing i promise, make scraper instantiate recipes
+class FoodNetworkScraper < ThanksgivingRecipes::Scraper
     @@leftover_recipes = []
     @@page = ''
     def self.get_recipes(item, more=false)
@@ -73,6 +73,11 @@ class FoodNetworkScraper < ThanksgivingRecipes::Scraper #TODO: Last thing i prom
             sub_recipes: sub_recipes,
             directions: directions
         }
+    end
+
+    def self.add_recipe_attributes(recipe)
+        attributes =  get_recipe_info(recipe.link)
+        recipe.add_attributes(attributes)
     end
 
     def self.get_directions(doc,subrecipe=nil)
