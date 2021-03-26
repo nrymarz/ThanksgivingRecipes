@@ -9,8 +9,5 @@ The gems required to use this app are: nokogiri and open-uri
 
 To run the application execute the run file by typing './bin/run'
 
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/nrymarz/thanksgiving_recipes.
-
-# ThanksgivingRecipes
+## Check out the demo
+Watch a demonstration of this application here: https://www.youtube.com/watch?v=I7SSOWxeb3M
