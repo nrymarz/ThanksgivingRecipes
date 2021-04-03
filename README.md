@@ -6,8 +6,8 @@ saving recipes for Thanksgiving from the the foodnetwork website.
 The gems required to use this app are: nokogiri and open-uri
 
 ## Usage
-
-To run the application execute the run file by typing './bin/run'
+Download this app by cloning this repo. 
+Run the application execute the run file by typing './bin/run'
 
 ## Check out the demo
 Watch a demonstration of this application here: https://www.youtube.com/watch?v=I7SSOWxeb3M
